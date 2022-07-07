@@ -29,7 +29,7 @@ public class BasicItemController {
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "basic/item";
+        return "basic/items";
     }
 
     @GetMapping("/{itemId}")
@@ -50,11 +50,10 @@ public class BasicItemController {
                        @RequestParam int price,
                        @RequestParam Integer quantity,
                        Model model) {
-        Item item = Item.builder()
-                .itemName(itemName)
-                .price(price)
-                .quantity(quantity)
-                .build();
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
 
         itemRepository.save(item);
 
@@ -88,7 +87,7 @@ public class BasicItemController {
     /**
      * PRG 적용
      */
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV5(Item item) {
         itemRepository.save(item);
         return "redirect:basic/item/" + item.getId();
@@ -99,7 +98,7 @@ public class BasicItemController {
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:basic/item/" + item.getId();
+        return "redirect:/basic/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")

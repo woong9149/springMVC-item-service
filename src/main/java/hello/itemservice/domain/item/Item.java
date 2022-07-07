@@ -13,9 +13,15 @@ public class Item {
     private Integer price;
     private Integer quantity;
 
-    void initId(Long id) {
-        this.id = id;
+    public Item() {
     }
+
+    public Item(String itemName, Integer price, Integer quantity) {
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
 
     void updateItemName(String itemName) {
         this.itemName = itemName;

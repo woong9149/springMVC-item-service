@@ -64,6 +64,21 @@ public class BasicItemController {
 
 //    @PostMapping("/add")
     public String addItemV2(@ModelAttribute("item") Item item, Model model) {
+        /**
+         * @ModelAttrivute - 요청 파라미터 처리
+         * @ModelAttribute는 ITEM 객체를 생성하고, 요청 파라미터의 값을 프로퍼티 접근법(setXxx)으로 입력해준다.
+         *
+         * @ModelAttribute - Model 추가
+         * @ModelAttribute 는 중요한 한가지 기능이 더 있는데, 바로 모델(Model)에 @ModelAttribute로 지정한 객체를 자동으로 넣어준다.
+         * model.addAttribute("item", item);를 주석처리 해도 잘 동작한다.
+         *
+         * 모델에 데이터를 담을 때는 이름이 필요하다.
+         * 이름은 @ModelAttribute에 지정한 name(value) 속성을 사용한다.
+         * 만약 다음과 같이 @ModelAttribute의 이름을 다르게 지정하면 다른 이름으로 모델에 포함된다.
+         *
+         * @ModelAttribute("hello") Item item -> 이름을 hello 로 지정
+         * model.addAttribute("hello", item)-> 모델에 hello 이름으로 저장
+         */
         itemRepository.save(item);
         model.addAttribute("item", item);
 
